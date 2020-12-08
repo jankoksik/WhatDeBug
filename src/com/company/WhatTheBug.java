@@ -54,49 +54,49 @@ public class WhatTheBug {
      * print 2d table
      * where every new array inside an array is a new row
      */
-    public static void table(String[][] Danec)
+    public static void table(String[][] input_data)
     {
-        int rowmax =  Arrays.stream(Danec).map(row -> row.length).max(Integer::compare).get();
-        String[][] Dane = new String[Danec.length][rowmax];
-        String[][] Danecc = Danec.clone();
+        int rowmax =  Arrays.stream(input_data).map(row -> row.length).max(Integer::compare).get();
+        String[][] Data = new String[input_data.length][rowmax];
+        String[][] Datacc = input_data.clone();
         int yc =0;
 
-        for(String y[] : Danec ) {
+        for(String y[] : input_data ) {
             int xc =0;
             for(String x : y)
             {
-                String tekst = "";
+                String text = "";
 
-                tekst = Danecc[yc][xc].replace("\u001B[0m","");
-                tekst = tekst.replace("\u001B[30m","");
-                tekst = tekst.replace("\u001B[31m","");
-                tekst = tekst.replace("\u001B[32m","");
-                tekst = tekst.replace("\u001B[33m","");
-                tekst = tekst.replace("\u001B[34m","");
-                tekst = tekst.replace("\u001B[35m","");
-                tekst = tekst.replace("\u001B[36m","");
-                tekst = tekst.replace("\u001B[37m","");
-                Dane[yc][xc] = tekst;
+                text = Datacc[yc][xc].replace("\u001B[0m","");
+                text = text.replace("\u001B[30m","");
+                text = text.replace("\u001B[31m","");
+                text = text.replace("\u001B[32m","");
+                text = text.replace("\u001B[33m","");
+                text = text.replace("\u001B[34m","");
+                text = text.replace("\u001B[35m","");
+                text = text.replace("\u001B[36m","");
+                text = text.replace("\u001B[37m","");
+                Data[yc][xc] = text;
 
 
                 xc++;
             }
             yc+=1;
         }
-        char lewyGorny = '╔';
-        char pion = '║';
-        char prawyGorny = '╗';
-        char prawyDolny = '╝';
-        char poziom = '═';
-        char lewyDolny = '╚';
-        char krzyz = '╬';
-        char wciecieprawe = '╠';
-        char wcieciedol = '╦';
-        char wciecielewo = '╣';
-        char wcieciegora = '╩';
+        char leftUp = '╔';
+        char vertical = '║';
+        char rightUp = '╗';
+        char rightDown = '╝';
+        char horizontal = '═';
+        char leftDown = '╚';
+        char cross = '╬';
+        char rightWing = '╠';
+        char DownWing = '╦';
+        char leftWing = '╣';
+        char upWing = '╩';
 
         int maxx = 0;
-        for(String y[] : Dane )
+        for(String y[] : Data )
         {
             int currx = 0;
             int columnsc = 0;
@@ -124,39 +124,39 @@ public class WhatTheBug {
         String linec = "";
 
 
-        line+=lewyGorny;
-        for (String x : Dane[0]) {
+        line+=leftUp;
+        for (String x : Data[0]) {
             if(x == null){continue;}
             for (int i = 0; i < x.length() + 2; i++) {
-                line+=poziom;
+                line+=horizontal;
             }
-            line+=wcieciedol;
+            line+=DownWing;
         }
         line = line.substring(0,line.length() - 1);
         while(line.length() < maxx-1)
         {
-            line+=poziom;
+            line+=horizontal;
         }
-        line+= prawyGorny;
+        line+= rightUp;
         System.out.println(line);
         line = "";
         String OLdLine = "";
 
 
         int calscy = -1;
-        for(String y[] : Dane)
+        for(String y[] : Data)
         {
             calscy +=1;
             int calcx = 0;
             for(String x : y)
             {
                 if(x!= null) {
-                    line+=pion + " ";
+                    line+=vertical + " ";
                     line+= x;
                     line += " ";
 
-                    linec += pion + " ";
-                    linec += Danec[calscy][calcx];
+                    linec += vertical + " ";
+                    linec += input_data[calscy][calcx];
                     linec += " ";
 
                     calcx++;
@@ -171,31 +171,31 @@ public class WhatTheBug {
 
             if(OLdLine!=""){
                 String przerywnik ="";
-                przerywnik += wciecieprawe;
+                przerywnik += rightWing;
                 int k=1;
                 while(przerywnik.length() <maxx-1)
                 {
 
-                    if(line.charAt(k)==pion && OLdLine.charAt(k)==pion)
+                    if(line.charAt(k)==vertical && OLdLine.charAt(k)==vertical)
                     {
-                        przerywnik += krzyz;
+                        przerywnik += cross;
                     }
-                    else if(line.charAt(k)==pion)
+                    else if(line.charAt(k)==vertical)
                     {
-                        przerywnik+= wcieciedol;
+                        przerywnik+= DownWing;
                     }
-                    else if(OLdLine.charAt(k)==pion)
+                    else if(OLdLine.charAt(k)==vertical)
                     {
-                        przerywnik += wcieciegora;
+                        przerywnik += upWing;
                     }
                     else {
-                        przerywnik += poziom;
+                        przerywnik += horizontal;
                     }
 
 
                     k+=1;
                 }
-                przerywnik += wciecielewo;
+                przerywnik += leftWing;
 
                 System.out.println(przerywnik);
             }
@@ -204,8 +204,8 @@ public class WhatTheBug {
 
             OLdLine  = line;
 
-            line+=pion;
-            linec +=pion;
+            line+=vertical;
+            linec +=vertical;
             System.out.println(linec);
             linec = "";
             line = "";
@@ -215,20 +215,20 @@ public class WhatTheBug {
 
 
 
-        line+=lewyDolny;
-        for (String x : Dane[Dane.length-1]) {
+        line+=leftDown;
+        for (String x : Data[Data.length-1]) {
             if(x==null){continue;}
             for (int i = 0; i < x.length() + 2; i++) {
-                line+=poziom;
+                line+=horizontal;
             }
-            line+=wcieciegora;
+            line+=upWing;
         }
         line = line.substring(0,line.length() - 1);
         while(line.length() < maxx-1)
         {
-            line+=poziom;
+            line+=horizontal;
         }
-        line+= prawyDolny;
+        line+= rightDown;
         System.out.println(line);
 
 
@@ -286,7 +286,7 @@ public class WhatTheBug {
         return  ending + text + ANSI_RESET;
     }
 
-    
+
 
 
 }
