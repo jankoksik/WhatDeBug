@@ -2,11 +2,12 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class WhatTheBug {
 
     public enum color {
-        red, green, blue, black, yellow, purple, cyan, white
+        red, green, blue, black, yellow, purple, cyan, white, rainbow
 
     }
 
@@ -250,6 +251,24 @@ public class WhatTheBug {
         final String ANSI_WHITE = "\u001B[37m";
         String ending = "";
         switch (Color) {
+            case rainbow:
+                ArrayList<String> rainbowColors = new ArrayList<String>();
+                rainbowColors.add("\u001B[31m");
+                rainbowColors.add("\u001B[32m");
+                rainbowColors.add("\u001B[33m");
+                rainbowColors.add("\u001B[34m");
+                rainbowColors.add("\u001B[35m");
+                rainbowColors.add("\u001B[36m");
+                Random rand = new Random();
+                char[] t = text.toCharArray();
+                String fin = "";
+                for(char s : t){
+                    int randomElementIndex =  rand.nextInt(rainbowColors.size());
+                    ending = rainbowColors.get(randomElementIndex);
+                    fin += ending + s ;
+                }
+                fin += ANSI_RESET;
+                return fin;
             case red:
                 ending = ANSI_RED;
                 break;
@@ -286,6 +305,15 @@ public class WhatTheBug {
         return  ending + text + ANSI_RESET;
     }
 
+
+
+    public static void main(String[] Args){
+        table(new String[][]{{coloredText("Hello there", color.rainbow), "!"}, {"I am a sample table "}, {"as you can ","see","I am "+coloredText("rly", color.red)+" easy to use"}}) ;
+
+
+
+
+    }
 
 
 
