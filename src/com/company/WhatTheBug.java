@@ -238,7 +238,7 @@ public class WhatTheBug {
     /**
      * Generate some colored text
      */
-    public static String coloredText(String text, color kolor) {
+    public static String coloredText(String text, color Color) {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_BLACK = "\u001B[30m";
         final String ANSI_RED = "\u001B[31m";
@@ -249,7 +249,7 @@ public class WhatTheBug {
         final String ANSI_CYAN = "\u001B[36m";
         final String ANSI_WHITE = "\u001B[37m";
         String ending = "";
-        switch (kolor) {
+        switch (Color) {
             case red:
                 ending = ANSI_RED;
                 break;
