@@ -305,13 +305,16 @@ public class WhatTheBug {
         return  ending + text + ANSI_RESET;
     }
 
-
+    //TODO : multi thread progress bar, flat table
 
     public static void main(String[] Args){
         table(new String[][]{{coloredText("Hello there", color.rainbow), "!"}, {"I am a sample table "}, {"as you can ","see","I am "+coloredText("rly", color.red)+" easy to use"}}) ;
 
+        ProgressBar pb = new ProgressBar();
+        pb.setFilledColor(color.green);
+        pb.setBlankColor(color.red);
 
-
+        table(new String[][] {{"Sample progressbar"}, {pb.GetDraw(4.0)}});
 
     }
 
