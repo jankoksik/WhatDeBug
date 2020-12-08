@@ -72,7 +72,7 @@ public class ProgressBar {
         if(getCurrentValue() > getMaxValue()){
             setCurrentValue(MaxValue);
         }
-        double passer = getSize()/getMaxValue();
+        double passer = getMaxValue()/getSize();
         int currentState = (int)(Math.floor(getCurrentValue() / passer));
         String part1="";
         for(int i=0; i< currentState; i++)

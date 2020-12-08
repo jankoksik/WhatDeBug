@@ -7,7 +7,7 @@ import java.util.Random;
 public class WhatTheBug {
 
     public enum color {
-        red, green, blue, black, yellow, purple, cyan, white, rainbow
+        red, green, blue, black, yellow, purple, cyan, white, rainbowRand, rainbowSeq
 
     }
 
@@ -251,7 +251,7 @@ public class WhatTheBug {
         final String ANSI_WHITE = "\u001B[37m";
         String ending = "";
         switch (Color) {
-            case rainbow:
+            case rainbowRand:
                 ArrayList<String> rainbowColors = new ArrayList<String>();
                 rainbowColors.add("\u001B[31m");
                 rainbowColors.add("\u001B[32m");
@@ -269,6 +269,26 @@ public class WhatTheBug {
                 }
                 fin += ANSI_RESET;
                 return fin;
+            case rainbowSeq:
+                ArrayList<String> rainbowColor = new ArrayList<String>();
+                rainbowColor.add("\u001B[31m");
+                rainbowColor.add("\u001B[32m");
+                rainbowColor.add("\u001B[33m");
+                rainbowColor.add("\u001B[34m");
+                rainbowColor.add("\u001B[35m");
+                rainbowColor.add("\u001B[36m");
+                char[] ar = text.toCharArray();
+                String res = "";
+                int iter = 0;
+                for(char s : ar){
+                    ending = rainbowColor.get(iter);
+                    iter+=1;
+                    if(iter>rainbowColor.size()-1)
+                        iter=0;
+                    res += ending + s ;
+                }
+                res += ANSI_RESET;
+                return res;
             case red:
                 ending = ANSI_RED;
                 break;
@@ -299,22 +319,20 @@ public class WhatTheBug {
 
 
         }
-
-
-
         return  ending + text + ANSI_RESET;
     }
 
-    //TODO : multi thread progress bar, flat table
+
 
     public static void main(String[] Args){
-        table(new String[][]{{coloredText("Hello there", color.rainbow), "!"}, {"I am a sample table "}, {"as you can ","see","I am "+coloredText("rly", color.red)+" easy to use"}}) ;
+        table(new String[][]{{coloredText("Hello there", color.rainbowSeq), "!"}, {"I am a sample table "}, {"as you can ","see","I am "+coloredText("rly", color.red)+" easy to use"}}) ;
 
         ProgressBar pb = new ProgressBar();
-        pb.setFilledColor(color.green);
-        pb.setBlankColor(color.red);
-
-        table(new String[][] {{"Sample progressbar"}, {pb.GetDraw(4.0)}});
+        pb.setFilledColor(color.blue);
+        pb.setBlankColor(color.black);
+        String text = "Sample progressbar";
+        pb.setSize(text.length());
+        table(new String[][] {{text}, {pb.GetDraw(4.0)}});
 
     }
 
