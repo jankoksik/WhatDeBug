@@ -102,5 +102,15 @@ public class CheckList {
 
     }
 
+    public boolean isChecked(int id)
+    {
+        return checked.contains(id);
+    }
+    public boolean isChecked(String element)
+    {
+        return checked.contains(list.indexOf(element));
+    }
+
+
 
 }
