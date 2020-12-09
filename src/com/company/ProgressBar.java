@@ -93,9 +93,11 @@ public class ProgressBar {
         CurrentValue = currentValue;
         return GetDraw();
     }
+
     public void Draw(){
     System.out.print(GetDraw());
     }
+
     public void Draw(double currentValue){
         System.out.print(GetDraw(currentValue));
     }
