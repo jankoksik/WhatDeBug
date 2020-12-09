@@ -585,7 +585,7 @@ public class WhatTheBug {
         cl.setLeftBracket('<');
         cl.setRightBeracket('>');
 
-
+        cl.setListName("Shopping list");
         cl.add("buy milk");
         cl.add("buy cheese");
         cl.add("buy eggs");
