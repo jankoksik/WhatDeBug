@@ -1,13 +1,13 @@
 package com.company;
 
 public class ProgressBar {
-    double CurrentValue = 0;
-    double MaxValue = 10.0;
-    int size = 10;
-    char FilledCharacter = '█';
-    char BlankCharacter = '░';
-    WhatTheBug.color FilledColor =  WhatTheBug.color.white;
-    WhatTheBug.color BlankColor =  WhatTheBug.color.white;
+   private double CurrentValue = 0;
+   private double MaxValue = 10.0;
+   private int size = 10;
+   private char FilledCharacter = '█';
+   private char BlankCharacter = '░';
+   private WhatTheBug.color FilledColor =  WhatTheBug.color.white;
+   private WhatTheBug.color BlankColor =  WhatTheBug.color.white;
 
 
 

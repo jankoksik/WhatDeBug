@@ -575,6 +575,27 @@ public class WhatTheBug {
 
         flatTable(new String[][] {{"Some Data", "x"}, {"Product quantity", coloredText("44", color.cyan)}, {"Generated raports", coloredText("412", color.cyan)}, {"Vm's running", coloredText("5", color.cyan)}, {"Carrots sold", coloredText("2134", color.cyan)}, {"it can be null"}} );
 
+        System.out.print("\n");
+        CheckList cl = new CheckList();
+
+        cl.setCheckMark('V');
+        cl.setUnchecedkMark('X');
+        cl.setUncheckedColor(color.red);
+        cl.setCheckedColor(color.green);
+        cl.setLeftBracket('<');
+        cl.setRightBeracket('>');
+
+
+        cl.add("buy milk");
+        cl.add("buy cheese");
+        cl.add("buy eggs");
+        cl.add("buy butter");
+        cl.add("buy ham");
+
+        cl.SetChecked("buy eggs");
+        cl.SetChecked(4);
+
+        cl.Draw();
     }
 
 
