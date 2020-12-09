@@ -18,4 +18,8 @@ flat table :
 
 checklist : 
 
-![check list](checkList.png)
+![check list](checkList2.png)
+
+it looks really nice in the console! : 
+
+![console](previewBash.png)
