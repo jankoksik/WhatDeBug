@@ -1,5 +1,5 @@
 # WhatDeBug
-a small java class to create ascii/console GUI (dedicated mainly for windows).
+a small java class to create ascii/console GUI.
 Next updates soon.
 
 
