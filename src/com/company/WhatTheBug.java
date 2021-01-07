@@ -1,3 +1,7 @@
+/**
+ * @author N0pe
+ * @version 1.0.0
+ */
 package com.company;
 
 import java.util.ArrayList;
@@ -7,13 +11,16 @@ import java.util.Random;
 
 public class WhatTheBug {
 
+    /**
+     * text colors
+     */
     public enum color {
         red, green, blue, black, yellow, purple, cyan, white, rainbowRand, rainbowSeq
 
     }
 
     /**
-     * print out some data
+     * print out some data like errors etc
      */
     public static <T> void log(String Title, T data)
     {
@@ -43,7 +50,6 @@ public class WhatTheBug {
         System.out.println("| ");
         System.out.println();
     }
-
     private static String getTable(int tyt, char character){
         String x = "";
         for(int i = 0; i<tyt; i++)
@@ -56,7 +62,7 @@ public class WhatTheBug {
      * print 2d table
      * where every new array inside an array is a new row
      */
-    public static void table(String[][] input_data)
+    private static void table(String[][] input_data)
     {
         int rowmax =  Arrays.stream(input_data).map(row -> row.length).max(Integer::compare).get();
         String[][] Data = new String[input_data.length][rowmax];
@@ -323,242 +329,6 @@ public class WhatTheBug {
         return  ending + text + ANSI_RESET;
     }
 
-    public static void flatTable(String[][] input_data){
-        int rowmax =  Arrays.stream(input_data).map(row -> row.length).max(Integer::compare).get();
-        String[][] Data = new String[input_data.length][rowmax];
-        String[][] Datacc = input_data.clone();
-        ArrayList<Integer> lenghts = new ArrayList<>();
-
-
-        int yc =0;
-
-        for(String y[] : input_data ) {
-            int xc =0;
-            for(String x : y)
-            {
-                String text = "";
-
-                text = Datacc[yc][xc].replace("\u001B[0m","");
-                text = text.replace("\u001B[30m","");
-                text = text.replace("\u001B[31m","");
-                text = text.replace("\u001B[32m","");
-                text = text.replace("\u001B[33m","");
-                text = text.replace("\u001B[34m","");
-                text = text.replace("\u001B[35m","");
-                text = text.replace("\u001B[36m","");
-                text = text.replace("\u001B[37m","");
-                Data[yc][xc] = text;
-
-
-                xc++;
-            }
-            yc+=1;
-        }
-        int longestRow = 0;
-        for (int row = 0; row < Data.length; row++)
-            if (Data[row].length > longestRow)
-                longestRow = Data[row].length;
-        for(int i=0; i<longestRow; i++)
-        {
-            lenghts.add(getColumnWidth(Data, i));
-        }
-
-        char leftUp = '╔';
-        char vertical = '║';
-        char rightUp = '╗';
-        char rightDown = '╝';
-        char horizontal = '═';
-        char leftDown = '╚';
-        char cross = '╬';
-        char rightWing = '╠';
-        char DownWing = '╦';
-        char leftWing = '╣';
-        char upWing = '╩';
-
-        int maxx = 0;
-        for(String y[] : Data )
-        {
-            int currx = 0;
-            int columnsc = 0;
-            boolean pszy = true;
-            for(String x : y)
-            {
-                if(x!= null) {
-                    if (pszy) {
-                        pszy = false;
-                        currx += 4;
-                        currx += x.length();
-                    } else {
-                        currx += x.length() + 3;
-                    }
-                }
-
-            }
-
-            if(currx > maxx)
-                maxx = currx;
-
-        }
-
-        String line ="";
-        String linec = "";
-
-
-        line+=leftUp;
-        for (int len : lenghts) {
-            for(int i=0; i<len+2; i++){
-                line+=horizontal;
-            }
-            line+=DownWing;
-        }
-        line = line.substring(0,line.length() - 1);
-        line+=rightUp;
-        /*
-        for (int h =0; h<lenghts.size(); h++) {
-            String x = Data[0][h];
-            if(x == null){continue;}
-            for (int i = 0; i < lenghts.get(h) + 2; i++) {
-                line+=horizontal;
-            }
-            line+=DownWing;
-        }
-        line = line.substring(0,line.length() - 1);
-        while(line.length() < maxx-1)
-        {
-            line+=horizontal;
-        }
-        line+= rightUp;
-        */
-        System.out.println(line);
-        line = "";
-        String OLdLine = "";
-
-        int calscy = -1;
-        for(String y[] : Data)
-        {
-            calscy +=1;
-            int calcx = 0;
-            int calcLen = 0;
-            for(String x : y)
-            {
-                line += vertical;
-                linec+=vertical;
-                if(x==null){
-                    int v = lenghts.get(calcx)+2;
-                  for(int k=0; k<v; k++) {
-                      line += " ";
-                      linec += " ";
-                  }
-                }else{
-
-                    int c = x.length();
-                    for(int i=0; i<= (lenghts.get(calcx)- c)/2 ; i++ )
-                    {
-                        line += " ";
-                        linec += " ";
-                        calcLen +=1;
-                    }
-                    line += x;
-                    calcLen += x.length();
-                    linec += input_data[calscy][calcx];
-                    for(int i=0; i<= lenghts.get(calcx)-calcLen +1 ; i++ )
-                    {
-                        line += " ";
-                        linec += " ";
-                    }
-                    calcLen = 0;
-                }
-                calcx++;
-            }
-
-
-            //przerywnik
-            if(OLdLine!=""){
-                String przerywnik ="";
-                przerywnik += rightWing;
-                //int k=1;
-                for(int h : lenghts)
-                {
-                    for(int o=0; o < h+2; o++)
-                    {
-                        przerywnik += horizontal;
-                    }
-                    przerywnik += cross;
-                }
-                przerywnik = przerywnik.substring(0,przerywnik.length() - 1);
-
-
-                /*while(przerywnik.length() <maxx-1)
-                {
-
-                    if(line.charAt(k)==vertical && OLdLine.charAt(k)==vertical)
-                    {
-                        przerywnik += cross;
-                    }
-                    else if(line.charAt(k)==vertical)
-                    {
-                        przerywnik+= DownWing;
-                    }
-                    else if(OLdLine.charAt(k)==vertical)
-                    {
-                        przerywnik += upWing;
-                    }
-                    else {
-                        przerywnik += horizontal;
-                    }
-
-
-                    k+=1;
-                }
-                */
-
-                przerywnik += leftWing;
-
-                System.out.println(przerywnik);
-            }
-
-
-
-            OLdLine  = line;
-
-            line+=vertical;
-            linec +=vertical;
-            System.out.println(linec);
-            linec = "";
-            line = "";
-        }
-
-
-
-
-
-        line+=leftDown;
-        for (int len : lenghts) {
-            for(int i=0; i<len+2; i++){
-                line+=horizontal;
-            }
-            line+=upWing;
-        }
-        line = line.substring(0,line.length() - 1);
-        line+=rightDown;
-        System.out.println(line);
-
-
-
-
-
-    }
-    private static int getColumnWidth(String[][] input_data, int col){
-        int max = 0;
-        for(int i=0; i<input_data.length; i++){
-            if(input_data[i][col]!=null && input_data[i][col].length() > max){
-                max = input_data[i][col].length();
-            }
-        }
-        return  max;
-    }
-
-
     public static void main(String[] Args){
         table(new String[][]{{coloredText("Hello there", color.rainbowSeq), "!"}, {"I am a sample table "}, {"as you can ","see","I am "+coloredText("rly", color.red)+" easy to use"}}); ;
 
@@ -571,10 +341,12 @@ public class WhatTheBug {
 
         pb.setSize(10);
         pb.setFilledColor(color.green);
-        flatTable(new String[][] {{"Loadning ..."}, {pb.GetDraw(7.0)}});
-
-        flatTable(new String[][] {{"Some Data", "x"}, {"Product quantity", coloredText("44", color.cyan)}, {"Generated raports", coloredText("412", color.cyan)}, {"Vm's running", coloredText("5", color.cyan)}, {"Carrots sold", coloredText("2134", color.cyan)}, {"it can be null"}} );
-
+        Table x = new Table();
+        x.flatTable(new String[][] {{"Loadning ..."}, {pb.GetDraw(7.0) + " 70%"}});
+        Table c = new Table();
+        c.flatTable(new String[][] {{"Some Data", "x"}, {"Product quantity", coloredText("44", color.cyan)}, {"Generated raports", coloredText("412", color.cyan)}, {"Vm's running", coloredText("5", color.cyan)}, {"Carrots sold", coloredText("2134", color.cyan)}, {"it can be null"}} );
+        Table v = new Table();
+        v.flatTable(new String[][] {{"many \n label \n table", "example", "to \n see result"}});
         System.out.print("\n");
         CheckList cl = new CheckList();
 
@@ -596,6 +368,7 @@ public class WhatTheBug {
         cl.SetChecked(4);
 
         cl.Draw();
+        log("sample log", "sample data");
     }
 
 
